@@ -19,18 +19,26 @@ public class LoginServlet extends HttpServlet {
 	
 	//로그인 폼으로 이동
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		System.out.println("loginservlet) doget 시작");
+		HttpSession session = request.getSession(); //세션이 없을 때 새로 생성, 있으면 세션 리턴
 		if(session.getAttribute("loginStaff") != null) {//로그인 상태일 떄
 			response.sendRedirect(request.getContextPath()+"/auth/IndexServlet");  // auth폴더는 로그인 되어있는 회원만 접근 가능
 			return;
 		}
-		stateService = new StateService();
+		System.out.println("loginservlet) doget stateListener and 로그인 확인 이후");
 		
+		stateService = new StateService();
 		State state = stateService.getState();
+		System.out.println("loginservlet) doget new stateservice생성 및 getState()");
+		
 		request.setAttribute("state", state);
+		System.out.println("loginservlet) doget session 저장");
 		
 		int totalCount = stateService.getTotalCount();
+		System.out.println("loginservlet) doget total");
+		
 		request.setAttribute("totalCount",totalCount);
+		System.out.println("loginservlet) doget total session");
 		
 		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 	}

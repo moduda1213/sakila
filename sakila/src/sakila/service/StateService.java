@@ -1,5 +1,6 @@
 package sakila.service;
 import java.sql.*;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -10,7 +11,6 @@ import sakila.vo.*;
 public class StateService {
 	private StateDao stateDao;
 
-	
 	public State getToday() { // getState, countState 메서드에 중복되는 코드 -> getToday()
 		System.out.println("Service) getToday()");
 		
@@ -31,8 +31,6 @@ public class StateService {
 		State returnState = null; 
 		
 		stateDao = new StateDao();
-		
-	
 		
 		Connection conn = null;
 		try {
@@ -62,7 +60,7 @@ public class StateService {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(returnState.getCount()+"returnState getCount()");
+		System.out.println(returnState.getCount()+"returnState getCount()"); // 현재 회원 방문 수
 		return returnState;
 	}
 
@@ -76,18 +74,17 @@ public class StateService {
 			System.out.println("Service) countState() try~");
 			
 			conn = DBUtil.connection();
-			System.out.println("12");
-			State state = this.getToday();//state.day = 오늘날짜
+			State state = this.getToday();//state.day = 오늘날짜 // 내부클래스에 있는 getToday를 사용하기 위한 this
 			
 			if(stateDao.selectDay(conn, state) == null) { // 컬럼이 존재? null => 오늘 날짜로 insert
 				System.out.println("Service) insert");
 				stateDao.insertState(conn, state); 
 			}else {											// !null => 오늘 날짜로 update
-				stateDao.updateState(conn, state);
 				System.out.println("Service) update");
+				stateDao.updateState(conn, state);
 			}
 			conn.commit();
-		}catch(Exception e) {
+		}catch(Exception e) { //에러발생 시
 			e.printStackTrace();
 			try {
 				System.out.println("Service) countState() try~catch~Exception");
@@ -98,7 +95,7 @@ public class StateService {
 				e1.printStackTrace();
 			}
 			
-		}finally {
+		}finally { // 무조건 거쳐가야함
 			try {
 				System.out.println("Service) countState() finally-try");
 				conn.close(); 
