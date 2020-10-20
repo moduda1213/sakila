@@ -5,7 +5,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 @WebListener
-public class DBListener implements ServletContextListener {
+public class DBListener implements ServletContextListener { //ServletContextListener : ÅèÄ¹ÀÌ ÄÑÁú¶§ ½ÇÇà
 
     public DBListener() {
     	
