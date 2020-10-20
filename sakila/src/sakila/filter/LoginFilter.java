@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 public class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		System.out.println("LoginFilter 실행 : session 검사");
-		HttpSession session = ((HttpServletRequest)request).getSession(); 
+		HttpSession session = ((HttpServletRequest)request).getSession(); //
 		if(session.getAttribute("loginStaff") == null) {
 			System.out.println("로그인 후 접근!");
 			((HttpServletResponse)response).sendRedirect(request.getServletContext().getContextPath()+"/LoginServlet");

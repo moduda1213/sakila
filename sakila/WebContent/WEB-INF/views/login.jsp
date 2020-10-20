@@ -19,6 +19,12 @@
 	<div>&nbsp;</div>
 	<div>&nbsp;</div>
 	
+	<div>
+		오늘 접속자 수 : ${state.count}
+	</div>
+	<div>
+		총 접속자 수 : ${totalCount}
+	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col"></div>
