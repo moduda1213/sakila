@@ -44,7 +44,6 @@ public class LoginServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 	
-		
 	}
 	
 	//로그린 액션으로 이동

@@ -15,7 +15,6 @@ public class Staff {
 	private String password;
 	private String lastUpdate;
 	
-	
 	public int getStaffId() {
 		return staffId;
 	}
