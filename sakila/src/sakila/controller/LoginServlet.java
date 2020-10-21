@@ -43,7 +43,6 @@ public class LoginServlet extends HttpServlet {
 		//System.out.println("loginservlet) doget total session");
 		
 		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
-	
 	}
 	
 	//로그린 액션으로 이동

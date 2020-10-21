@@ -3,7 +3,6 @@ import java.sql.*;
 import sakila.vo.*;
 import sakila.query.StaffQuery;
 
-
 public class StaffDao {
 
 	//id , pw 정보에 맞는 스태프의 id, username 불러오기
