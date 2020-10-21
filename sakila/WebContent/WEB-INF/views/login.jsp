@@ -39,19 +39,19 @@
 	
 				<div>&nbsp;</div>
 				
-				<form>
+				<form method="post">
 					<div>
-						<input type="text" placeholder="ID" class="form-control form-control">
+						<input type="text" name ="id" placeholder="ID" class="form-control form-control">
 					</div>
 					<div>&nbsp;</div>
 					<div>
-						<input type="password" placeholder="PW" class="form-control form-control">
+						<input type="password" name ="pw" placeholder="PW" class="form-control form-control">
 					</div>
 					<div>&nbsp;</div>
 					<div class="row">
 						<div class="col"></div>
 						<div class="col">
-							<button type="button"type="button" class="btn btn-primary" style="width:350px">Log-in</button>
+							<button type="submit" class="btn btn-primary" style="width:350px">Log-in</button>
 						</div>
 						<div class="col"></div>
 					</div>

@@ -12,7 +12,7 @@ public class StateService {
 	private StateDao stateDao;
 
 	public State getToday() { // getState, countState 메서드에 중복되는 코드 -> getToday()
-		System.out.println("Service) getToday()");
+		//System.out.println("Service) getToday()");
 		
 		Calendar today = Calendar.getInstance(); // 오늘 날짜 구하기
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd"); // 날짜 형식 yyyy-MM-dd
@@ -27,14 +27,14 @@ public class StateService {
 	}
 	
 	public State getState() { // 컬럼 출력을 위한 메서드 , -> 최종 : public Map<String, Object> getState()
-		System.out.println("Service) getState()");
+		//System.out.println("Service) getState()");
 		State returnState = null; 
 		
 		stateDao = new StateDao();
 		
 		Connection conn = null;
 		try {
-			System.out.println("Service) getState try 진입");
+			//System.out.println("Service) getState try 진입");
 			
 			conn = DBUtil.connection();
 			
@@ -44,19 +44,19 @@ public class StateService {
 			conn.commit();
 		}catch(Exception e) {
 			try {
-				System.out.println("Service) getState catch(Exception-try 진입");
+				//System.out.println("Service) getState catch(Exception-try 진입");
 				conn.rollback();
 			}catch(SQLException e1) {
-				System.out.println("Service) getState catch(Exception-catch 진입");
+				//System.out.println("Service) getState catch(Exception-catch 진입");
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
 		}finally {
 			try {
-				System.out.println("Service) getState finally-try 진입");
+				//System.out.println("Service) getState finally-try 진입");
 				conn.close();
 			}catch(SQLException e){
-				System.out.println("Service) getState finally-catch 진입");
+				//System.out.println("Service) getState finally-catch 진입");
 				e.printStackTrace();
 			}
 		}
@@ -66,48 +66,48 @@ public class StateService {
 
 	
 	public void countState() { // 카운팅 하는 메서드
-		System.out.println("Service) countState()");
+		//System.out.println("Service) countState()");
 		stateDao = new StateDao();
 		Connection conn = null;
 		
 		try {
-			System.out.println("Service) countState() try~");
+			//System.out.println("Service) countState() try~");
 			
 			conn = DBUtil.connection();
 			State state = this.getToday();//state.day = 오늘날짜 // 내부클래스에 있는 getToday를 사용하기 위한 this
 			
 			if(stateDao.selectDay(conn, state) == null) { // 컬럼이 존재? null => 오늘 날짜로 insert
-				System.out.println("Service) insert");
+				//System.out.println("Service) insert");
 				stateDao.insertState(conn, state); 
 			}else {											// !null => 오늘 날짜로 update
-				System.out.println("Service) update");
+				//System.out.println("Service) update");
 				stateDao.updateState(conn, state);
 			}
 			conn.commit();
 		}catch(Exception e) { //에러발생 시
 			e.printStackTrace();
 			try {
-				System.out.println("Service) countState() try~catch~Exception");
+				//System.out.println("Service) countState() try~catch~Exception");
 				e.printStackTrace();
 				conn.rollback();
 			}catch(SQLException e1) {
-				System.out.println("Service) countState() try~catch~SQLException");
+				//System.out.println("Service) countState() try~catch~SQLException");
 				e1.printStackTrace();
 			}
 			
 		}finally { // 무조건 거쳐가야함
 			try {
-				System.out.println("Service) countState() finally-try");
+				//System.out.println("Service) countState() finally-try");
 				conn.close(); 
 			}catch(SQLException e){
-				System.out.println("Service) countState() finally-catch");
+				//System.out.println("Service) countState() finally-catch");
 				e.printStackTrace();
 			}
 		}
 	}
 	
 	public int getTotalCount() {
-		System.out.println("Service) getTotalCount()");
+		//System.out.println("Service) getTotalCount()");
 		int totalCount=0;
 		stateDao = new StateDao();
 		Connection conn = null;
