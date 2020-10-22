@@ -14,7 +14,7 @@ import sakila.service.StaffService;
 import sakila.service.StateService;
 import sakila.vo.*;
 
-@WebServlet("/LoginServlet")
+@WebServlet({"/","/LoginServlet"}) //로그인 서블릿으로 이동하라 또는 아무것도 안해도 이 서블릿으로 들어간다
 public class LoginServlet extends HttpServlet {
 	private StateService stateService;
 	private StaffService staffService;
@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 		if(session.getAttribute("loginStaff") != null) {//로그인 상태일 떄
 			System.out.println("loginservlet) 로그인 상태인가?");
 
-			response.sendRedirect(request.getContextPath()+"/IndexServlet");  // auth폴더는 로그인 되어있는 회원만 접근 가능  | 초기 코드 auth/IndexServlet
+			response.sendRedirect(request.getContextPath()+"/auth/IndexServlet");  // auth폴더는 로그인 되어있는 회원만 접근 가능  | 초기 코드 auth/IndexServlet
 			return;
 		}
 		//System.out.println("loginservlet) doget stateListener and 로그인 확인 이후");
@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 		String pw = "";
 		staffService = new StaffService();
 		
-		//requset 잘받았는지 디버깅
+		//request 잘받았는지 디버깅
 		System.out.println("doPost) request.getParameter('id')=> "+ request.getParameter("id"));
 		System.out.println("doPost) request.getParameter('pw')=> " + request.getParameter("pw"));
 		Staff staff = new Staff(); // request ...
@@ -64,8 +64,8 @@ public class LoginServlet extends HttpServlet {
 		if(request.getParameter("id")== "" || request.getParameter("pw")== "" ) {
 			staff.setStaffId(id);
 			staff.setPassword(pw);
-		}else {
-			System.out.println("doPost) 들어감?");
+		}else {//id/pw입력했을 때
+			System.out.println("doPost) request else{}");
 			id = Integer.parseInt(request.getParameter("id"));
 			pw = request.getParameter("pw");
 			staff.setStaffId(id);
@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
 		
 		
 		Staff returnStaff = null;
-		returnStaff = staffService.getStaffIDPW(staff);
+		returnStaff = staffService.getStaffIDPW(staff); // 일치하는지 판단
 		
 		if(returnStaff != null) {
 			System.out.println("로그인 성공");
@@ -83,13 +83,13 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginStaff", returnStaff); //doGet에서 로그인 상태인지 아닌지 판단하기 위해
 			
-			request.setAttribute("staff", returnStaff);
 			// indexServlet 포워딩
-			request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+			//request.getRequestDispatcher("/WEB-INF/views/auth/index.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/auth/IndexServlet");
 			
 		}else {
 			System.out.println("로그인 실패");
-			response.sendRedirect(request.getContextPath()+"/LoginServlet");
+			response.sendRedirect(request.getContextPath()+"/");
 		}
 		
 	}

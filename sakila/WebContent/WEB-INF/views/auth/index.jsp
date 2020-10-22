@@ -7,7 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>${staff.staffId }</h2>
-	<h2>${staff.userName}</h2>
+	<h1>Sakila Movie</h1>
+	
+	<div>
+		<span>${LoginStaff.email}</span>°ü¸®ÀÚ´Ô <!-- session.loginstaff -->
+	</div>
+	<div>
+		<a href=${pageContext.request.contextPath}/auth/LogoutServlet>·Î±×¾Æ¿ô</a>
+	</div>
 </body>
 </html>

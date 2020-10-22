@@ -36,8 +36,9 @@ public class StateService {
 		try {
 			//System.out.println("Service) getState try 진입");
 			
-			conn = DBUtil.connection();
 			
+			conn = DBUtil.connection();
+			conn.setAutoCommit(false); // 여러 쿼리문장을 하나의 작업으로 수행시키기 위해
 			State state = this.getToday();
 			
 			returnState = stateDao.selectDay(conn, state);//조건에 맞는 컬럼 저장
@@ -74,6 +75,7 @@ public class StateService {
 			//System.out.println("Service) countState() try~");
 			
 			conn = DBUtil.connection();
+			conn.setAutoCommit(false);
 			State state = this.getToday();//state.day = 오늘날짜 // 내부클래스에 있는 getToday를 사용하기 위한 this
 			
 			if(stateDao.selectDay(conn, state) == null) { // 컬럼이 존재? null => 오늘 날짜로 insert

@@ -21,6 +21,7 @@ public class StaffService {
 			System.out.println("StaffService) staff id=> "+staff.getStaffId()+" staff pw=> "+ staff.getPassword());
 			
 			conn = DBUtil.connection();
+			conn.setAutoCommit(false); // 코드의 일관성을 위해 코드를 작성했지만 setAutoCommit은 insert, update 트랜잭션 사용할 때 사용한다.
 			staffDao = new StaffDao();
 			
 			returnStaff = staffDao.selectStaffIDPW(conn, staff);

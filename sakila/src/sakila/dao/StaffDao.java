@@ -12,9 +12,9 @@ public class StaffDao {
 		Staff returnStaff = null;
 		
 		PreparedStatement stmt = conn.prepareStatement(StaffQuery.SELECT_STAFF_ID_PW);
-		System.out.println("StaffDao) selectStaffIDPW 孽府 己傍 ");
+		System.out.println("StaffDao) selectStaffIDPW 孽府 己傍 "); //id, username
 		stmt.setInt(1, staff.getStaffId());
-		stmt.setNString(2, staff.getPassword());
+		stmt.setString(2, staff.getPassword());
 		//stmt.setNString(2, "PASSWORD("+staff.getPassword()+")"); => query -> password=?
 		ResultSet rs = stmt.executeQuery();
 		
