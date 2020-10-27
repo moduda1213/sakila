@@ -10,8 +10,8 @@ import sakila.service.*;
 public class StateListener implements HttpSessionListener {
     private StateService stateService;
 	public StateListener() {}
-    public void sessionCreated(HttpSessionEvent se)  {  // ¼¼¼Ç »ı¼º½Ã Ä³Ä¡ÇØ¼­ ½ÇÇà
-    	System.out.println("StateListener ÁøÀÔ");
+    public void sessionCreated(HttpSessionEvent se)  {  //ì„¸ì…˜ ìƒì„±ì‹œ ìºì¹˜í•´ì„œ ì‹¤í–‰
+    	System.out.println("StateListener ì§„ì…");
         if(se.getSession().isNew()) {
         	stateService = new StateService();
         	stateService.countState();

@@ -5,19 +5,19 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 @WebListener
-public class DBListener implements ServletContextListener { //ServletContextListener : ÅèÄ¹ÀÌ ÄÑÁú¶§ ½ÇÇà
+public class DBListener implements ServletContextListener { //ServletContextListener : í†°ìº£ì´ ì¼œì§ˆë•Œ ì‹¤í–‰
     public DBListener() {
     }
     public void contextDestroyed(ServletContextEvent arg0)  {      
     }
     
-    public void contextInitialized(ServletContextEvent arg0)  { //DBµå¶óÀÌºê ¿¬°á
-        System.out.println("DBListener.contextInitialized() ½ÇÇà");
+    public void contextInitialized(ServletContextEvent arg0)  { //DBë“œë¼ì´ë¸Œ ì—°ê²°
+        System.out.println("DBListener.contextInitialized() ì‹¤í–‰");
         try {
         	Class.forName("org.mariadb.jdbc.Driver");
-        	System.out.println("mariadb µå¶óÀÌºê·Îµù ¼º°ø");
+        	System.out.println("mariadb ë“œë¼ì´ë¸Œë¡œë”© ì„±ê³µ");
         }catch(ClassNotFoundException e) {
-        	System.out.println("Class.forName()½ÇÇà ½ÇÆĞ!");
+        	System.out.println("Class.forName()ì‹¤í–‰ ì‹¤íŒ¨!");
         	e.printStackTrace();
         }
     }	

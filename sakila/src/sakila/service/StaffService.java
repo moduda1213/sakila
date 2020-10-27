@@ -11,17 +11,17 @@ public class StaffService {
 	private StaffDao staffDao;
 	
 	public Staff getStaffIDPW(Staff staff) {
-		System.out.println("StaffService) getStaffIDPW ÁøÀÔ");
+		System.out.println("StaffService) getStaffIDPW state");
 		Staff returnStaff = null;
 		Connection conn = null;
 		
 		try {
-			System.out.println("StaffService) getStaffIDPW try ÁøÀÔ");
-			//staff Àß ³Ñ¾î¿Ô´ÂÁö È®ÀÎ
+			System.out.println("StaffService) getStaffIDPW try start");
+			//staff ì˜ ë„˜ì–´ì™”ëŠ”ì§€ í™•ì¸
 			System.out.println("StaffService) staff id=> "+staff.getStaffId()+" staff pw=> "+ staff.getPassword());
 			
 			conn = DBUtil.connection();
-			conn.setAutoCommit(false); // ÄÚµåÀÇ ÀÏ°ü¼ºÀ» À§ÇØ ÄÚµå¸¦ ÀÛ¼ºÇßÁö¸¸ setAutoCommitÀº insert, update Æ®·£Àè¼Ç »ç¿ëÇÒ ¶§ »ç¿ëÇÑ´Ù.
+			conn.setAutoCommit(false); // ì½”ë“œì˜ ì¼ê´€ì„±ì„ ìœ„í•´ ì½”ë“œë¥¼ ì‘ì„±í–ˆì§€ë§Œ setAutoCommitì€ insert, update íŠ¸ëœì­ì…˜ ì‚¬ìš©í•  ë•Œ ì‚¬ìš©í•œë‹¤.
 			staffDao = new StaffDao();
 			
 			returnStaff = staffDao.selectStaffIDPW(conn, staff);

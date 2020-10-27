@@ -16,10 +16,10 @@ import javax.servlet.http.HttpSession;
 @WebFilter("/auth/*")
 public class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println("LoginFilter ½ÇÇà : session °Ë»ç");
+		System.out.println("LoginFilter ì§„ì… : session ì¡´ì¬");
 		HttpSession session = ((HttpServletRequest)request).getSession(); //
 		if(session.getAttribute("loginStaff") == null) {
-			System.out.println("·Î±×ÀÎ ÈÄ Á¢±Ù!");
+			System.out.println("ë¡œê·¸ì¸ìƒíƒœ!");
 			((HttpServletResponse)response).sendRedirect(request.getServletContext().getContextPath()+"/LoginServlet");
 			return;
 		}

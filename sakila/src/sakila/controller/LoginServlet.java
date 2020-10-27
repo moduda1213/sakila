@@ -14,30 +14,30 @@ import sakila.service.StaffService;
 import sakila.service.StateService;
 import sakila.vo.*;
 
-@WebServlet({"/","/LoginServlet"}) //·Î±×ÀÎ ¼­ºí¸´À¸·Î ÀÌµ¿ÇÏ¶ó ¶Ç´Â ¾Æ¹«°Íµµ ¾ÈÇØµµ ÀÌ ¼­ºí¸´À¸·Î µé¾î°£´Ù
+@WebServlet({"/","/LoginServlet"}) //ë¡œê·¸ì¸ ì„œë¸”ë¦¿ìœ¼ë¡œ ì´ë™í•˜ë¼ ë˜ëŠ” ì•„ë¬´ê²ƒë„ ì•ˆí•´ë„ ì´ ì„œë¸”ë¦¿ìœ¼ë¡œ ë“¤ì–´ê°„ë‹¤
 public class LoginServlet extends HttpServlet {
 	private StateService stateService;
 	private StaffService staffService;
 	
-	//·Î±×ÀÎ ÆûÀ¸·Î ÀÌµ¿
+	//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//System.out.println("loginservlet) doget ½ÃÀÛ");
-		HttpSession session = request.getSession(); //¼¼¼ÇÀÌ ¾øÀ» ¶§ »õ·Î »ı¼º, ÀÖÀ¸¸é ¼¼¼Ç ¸®ÅÏ
+		System.out.println("loginservlet) doget ï¿½ï¿½ï¿½ï¿½");
+		HttpSession session = request.getSession(); //ì„¸ì…˜ì´ ì—†ì„ ë•Œ ìƒˆë¡œ ìƒì„±, ìˆìœ¼ë©´ ì„¸ì…˜ ë¦¬í„´
 		
-		if(session.getAttribute("loginStaff") != null) {//·Î±×ÀÎ »óÅÂÀÏ ‹š
-			System.out.println("loginservlet) ·Î±×ÀÎ »óÅÂÀÎ°¡?");
+		if(session.getAttribute("loginStaff") != null) {////ë¡œê·¸ì¸ ìƒíƒœì¼
+			System.out.println("loginservlet) login check");
 
-			response.sendRedirect(request.getContextPath()+"/auth/IndexServlet");  // authÆú´õ´Â ·Î±×ÀÎ µÇ¾îÀÖ´Â È¸¿ø¸¸ Á¢±Ù °¡´É  | ÃÊ±â ÄÚµå auth/IndexServlet
+			response.sendRedirect(request.getContextPath()+"/auth/IndexServlet");  // authí´ë”ëŠ” ë¡œê·¸ì¸ ë˜ì–´ìˆëŠ” íšŒì›ë§Œ ì ‘ê·¼ ê°€ëŠ¥  | ì´ˆê¸° ì½”ë“œ auth/IndexServlet
 			return;
 		}
-		//System.out.println("loginservlet) doget stateListener and ·Î±×ÀÎ È®ÀÎ ÀÌÈÄ");
+		System.out.println("loginservlet) doget stateListener and ë¡œê·¸ì¸ í™•ì¸ ì´í›„");
 		
 		stateService = new StateService();
 		State state = stateService.getState();
-		//System.out.println("loginservlet) doget new stateservice»ı¼º ¹× getState()");
+		//System.out.println("loginservlet) doget new stateserviceìƒì„± ë° getState()");
 		
 		request.setAttribute("state", state);
-		//System.out.println("loginservlet) doget session ÀúÀå");
+		//System.out.println("loginservlet) doget session ì €ì¥");
 		
 		int totalCount = stateService.getTotalCount();
 		//System.out.println("loginservlet) doget total");
@@ -48,23 +48,23 @@ public class LoginServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 	}
 	
-	//·Î±×¸° ¾×¼ÇÀ¸·Î ÀÌµ¿
+	//ë¡œê·¸ë¦° ì•¡ì…˜ìœ¼ë¡œ ì´ë™
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doPost) loginAction ÁøÀÔ");
+		System.out.println("doPost) loginAction ï¿½ï¿½ï¿½ï¿½");
 		int id = 0;
 		String pw = "";
 		staffService = new StaffService();
 		
-		//request Àß¹Ş¾Ò´ÂÁö µğ¹ö±ë
+		//request ì˜ë°›ì•˜ëŠ”ì§€ ë””ë²„ê¹…
 		System.out.println("doPost) request.getParameter('id')=> "+ request.getParameter("id"));
 		System.out.println("doPost) request.getParameter('pw')=> " + request.getParameter("pw"));
 		Staff staff = new Staff(); // request ...
 		
-		//¾Æ¹«°Íµµ ÀÔ·Â¾ÈÇÏ°í ·Î±×ÀÎ ÇßÀ» ¶§ ¿¡·¯ ¹æÁö
+		//ì•„ë¬´ê²ƒë„ ì…ë ¥ì•ˆí•˜ê³  ë¡œê·¸ì¸ í–ˆì„ ë•Œ ì—ëŸ¬ ë°©ì§€
 		if(request.getParameter("id")== "" || request.getParameter("pw")== "" ) {
 			staff.setStaffId(id);
 			staff.setPassword(pw);
-		}else {//id/pwÀÔ·ÂÇßÀ» ¶§
+		}else {//id/pwï¿½Ô·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 			System.out.println("doPost) request else{}");
 			id = Integer.parseInt(request.getParameter("id"));
 			pw = request.getParameter("pw");
@@ -74,21 +74,21 @@ public class LoginServlet extends HttpServlet {
 		
 		
 		Staff returnStaff = null;
-		returnStaff = staffService.getStaffIDPW(staff); // ÀÏÄ¡ÇÏ´ÂÁö ÆÇ´Ü
+		returnStaff = staffService.getStaffIDPW(staff);// ì¼ì¹˜í•˜ëŠ”ì§€ íŒë‹¨
 		
 		if(returnStaff != null) {
-			System.out.println("·Î±×ÀÎ ¼º°ø");
-			//session ´ã°í
+			System.out.println("ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+			//session ë‹´ê³ 
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("loginStaff", returnStaff); //doGet¿¡¼­ ·Î±×ÀÎ »óÅÂÀÎÁö ¾Æ´ÑÁö ÆÇ´ÜÇÏ±â À§ÇØ
+			session.setAttribute("loginStaff", returnStaff); //doGetì—ì„œ ë¡œê·¸ì¸ ìƒíƒœì¸ì§€ ì•„ë‹Œì§€ íŒë‹¨í•˜ê¸° ìœ„í•´
 			
-			// indexServlet Æ÷¿öµù
-			//request.getRequestDispatcher("/WEB-INF/views/auth/index.jsp").forward(request, response);
+			// indexServlet í¬ì›Œë”©
+			request.getRequestDispatcher("/WEB-INF/views/auth/index.jsp").forward(request, response);
 			response.sendRedirect(request.getContextPath()+"/auth/IndexServlet");
 			
 		}else {
-			System.out.println("·Î±×ÀÎ ½ÇÆĞ");
+			System.out.println("ë¡œê·¸ì¸ ì‹¤íŒ¨");
 			response.sendRedirect(request.getContextPath()+"/");
 		}
 		

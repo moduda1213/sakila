@@ -5,14 +5,14 @@ import sakila.query.StaffQuery;
 
 public class StaffDao {
 
-	//id , pw Á¤º¸¿¡ ¸Â´Â ½ºÅÂÇÁÀÇ id, username ºÒ·¯¿À±â
+	//id , pw ì •ë³´ì— ë§ëŠ” ìŠ¤íƒœí”„ì˜ id, username ë¶ˆëŸ¬ì˜¤ê¸°
 	public Staff selectStaffIDPW(Connection conn, Staff staff) throws Exception{
-		System.out.println("StaffDao) selectStaffIDPW ÁøÀÔ");
+		System.out.println("StaffDao) selectStaffIDPW ì§„ì…");
 		
 		Staff returnStaff = null;
 		
 		PreparedStatement stmt = conn.prepareStatement(StaffQuery.SELECT_STAFF_ID_PW);
-		System.out.println("StaffDao) selectStaffIDPW Äõ¸® ¼º°ø "); //id, username
+		System.out.println("StaffDao) selectStaffIDPW ì¿¼ë¦¬ ì„±ê³µ "); //id, username
 		stmt.setInt(1, staff.getStaffId());
 		stmt.setString(2, staff.getPassword());
 		//stmt.setNString(2, "PASSWORD("+staff.getPassword()+")"); => query -> password=?
@@ -23,8 +23,8 @@ public class StaffDao {
 			returnStaff.setStaffId(rs.getInt("staff_id"));
 			returnStaff.setUserName(rs.getString("username"));
 		}
-		// ¿©±â¼­ PASSWORD ÇÔ¼ö ÁöÁ¤
-		System.out.println("StaffDao) selectStaffIDPW ³¡");
+		//ì—¬ê¸°ì„œ PASSWORD í•¨ìˆ˜ ì§€ì •
+		System.out.println("StaffDao) selectStaffIDPW ë");
 
 		return returnStaff;
 	}

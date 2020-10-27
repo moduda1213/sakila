@@ -1,6 +1,7 @@
+  
 /*
- 	ÇÁ·ÎÁ§Æ® ±¸Á¶ ¼ÂÆÃ
-	ÇÊÅÍ »ı¼º : requestÀÎÄÚµù ÇÊÅÍ, ÀÎÁõÆäÀÌÁö ¼¼¼Ç °Ë»ç ÇÊÅÍ
+ 	í”„ë¡œì íŠ¸ êµ¬ì¡° ì…‹íŒ…
+	í•„í„° ìƒì„± : requestì¸ì½”ë”© í•„í„°, ì¸ì¦í˜ì´ì§€ ì„¸ì…˜ ê²€ì‚¬ í•„í„°
 */
 package sakila.filter;
 
@@ -14,13 +15,13 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
 @WebFilter("/*")
-public class EncodingFilter implements Filter { // Ã¼ÀÎÀ» µû¶ó ´ÙÀ½¿¡ Á¸ÀçÇÏ´Â ÇÊÅÍ·Î ÀÌµ¿ / Ã¼ÀÎÀÇ °¡Àå ¸¶Áö¸·¿¡´Â Å¬¶óÀÌ¾ğÆ®°¡ ¿äÃ»ÇÑ ÃÖÁ¾ ÀÚ¿øÀÌ À§Ä¡
+public class EncodingFilter implements Filter { // ì²´ì¸ì„ ë”°ë¼ ë‹¤ìŒì— ì¡´ì¬í•˜ëŠ” í•„í„°ë¡œ ì´ë™ / ì²´ì¸ì˜ ê°€ì¥ ë§ˆì§€ë§‰ì—ëŠ” í´ë¼ì´ì–¸íŠ¸ê°€ ìš”ì²­í•œ ìµœì¢… ìì›ì´ ìœ„ì¹˜
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println("EncodingFilter ½ÇÇà : request utf-8 ÀÎÄÚµù");
+		System.out.println("EncodingFilter ì‹¤í–‰ : request utf-8 ì¸ì½”ë”©");
 		request.setCharacterEncoding("utf-8");
-		chain.doFilter(request, response); //µî·ÏµÈ ´ÙÀ½ ÇÊÅÍ·Î ÀÌµ¿
+		chain.doFilter(request, response); //ë“±ë¡ëœ ë‹¤ìŒ í•„í„°ë¡œ ì´ë™
 	}
 	public EncodingFilter() {}
-	public void destroy() {} // ÇÊÅÍ°¡ À¥ ÄÁÅ×ÀÌ³Ê¿¡¼­ »èÁ¦ÇÒ ¶§ È£Ãâ
-	public void init(FilterConfig fConfig) throws ServletException {} // ÇÊÅÍ¸¦ ÃÊ±âÈ­ÇÒ ¶§ È£Ãâ
+	public void destroy() {} // í•„í„°ê°€ ì›¹ ì»¨í…Œì´ë„ˆì—ì„œ ì‚­ì œí•  ë•Œ í˜¸ì¶œ
+	public void init(FilterConfig fConfig) throws ServletException {} // í•„í„°ë¥¼ ì´ˆê¸°í™”í•  ë•Œ í˜¸ì¶œ
 }

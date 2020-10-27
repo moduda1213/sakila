@@ -1,8 +1,8 @@
 package sakila.query;
 
 public class StaffQuery {
-	//Email(id), pw ºÒ·¯¿À´Â Äõ¸®
+	//Email(id), pw ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public static final String SELECT_STAFF_ID_PW =
-			"SELECT staff_id, username FROM staff WHERE staff_id=? and password=PASSWORD(?)"; // ? -> PASSWORD('1234');
+			"SELECT staff_id, username FROM staff WHERE staff_id=? and password=?"; // ? password=PASSWORD(?)
 }
 
