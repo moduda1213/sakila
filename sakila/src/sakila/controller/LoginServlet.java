@@ -26,7 +26,6 @@ public class LoginServlet extends HttpServlet {
 		
 		if(session.getAttribute("loginStaff") != null) {////로그인 상태일
 			System.out.println("loginservlet) login check");
-
 			response.sendRedirect(request.getContextPath()+"/auth/IndexServlet");  // auth폴더는 로그인 되어있는 회원만 접근 가능  | 초기 코드 auth/IndexServlet
 			return;
 		}
@@ -50,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 	
 	//로그린 액션으로 이동
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doPost) loginAction ����");
+		System.out.println("doPost) loginAction");
 		int id = 0;
 		String pw = "";
 		staffService = new StaffService();
@@ -64,12 +63,12 @@ public class LoginServlet extends HttpServlet {
 		if(request.getParameter("id")== "" || request.getParameter("pw")== "" ) {
 			staff.setStaffId(id);
 			staff.setPassword(pw);
-		}else {//id/pw�Է����� ��
+		}else {
 			System.out.println("doPost) request else{}");
 			id = Integer.parseInt(request.getParameter("id"));
 			pw = request.getParameter("pw");
 			staff.setStaffId(id);
-			staff.setPassword(request.getParameter("pw"));
+			staff.setPassword(pw);
 		}
 		
 		
@@ -77,14 +76,12 @@ public class LoginServlet extends HttpServlet {
 		returnStaff = staffService.getStaffIDPW(staff);// 일치하는지 판단
 		
 		if(returnStaff != null) {
-			System.out.println("�α��� ����");
 			//session 담고
-			
 			HttpSession session = request.getSession();
 			session.setAttribute("loginStaff", returnStaff); //doGet에서 로그인 상태인지 아닌지 판단하기 위해
 			
 			// indexServlet 포워딩
-			request.getRequestDispatcher("/WEB-INF/views/auth/index.jsp").forward(request, response);
+			//request.getRequestDispatcher("/WEB-INF/views/auth/index.jsp").forward(request, response);
 			response.sendRedirect(request.getContextPath()+"/auth/IndexServlet");
 			
 		}else {
